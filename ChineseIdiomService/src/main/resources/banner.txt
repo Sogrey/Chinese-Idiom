@@ -13,4 +13,4 @@
  ----------------------------------------------------------------
  Runtime Environment:${AnsiColor.BRIGHT_YELLOW} ${spring.profiles.active}${AnsiColor.WHITE}
  ================================================================
-                                                    
+

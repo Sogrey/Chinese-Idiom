@@ -1,1 +1,4 @@
-/SpringbootService/target
+/*/target
+/*/*.log
+/*/node_modules
+/ChineseIdiomService/src/main/resources/application-dev.properties
