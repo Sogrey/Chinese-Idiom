@@ -1,24 +1,34 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view />
+    <!-- <ChatList>
+    </ChatList> -->
+    <AndroidPhone></AndroidPhone>
+    <!-- <ServerList>
+    </ServerList> -->
   </div>
 </template>
 
 <script>
-import { get, post } from './http/http'
+import api from './http/api.js'
+import ChatList from './components/chat/ChatListView'
+import AndroidPhone from './components/AndroidPhone'
+// import ServerList from './components/ServerList'
 export default {
-  name: 'App', data() {
+  name: 'App',
+  components: {
+    ChatList,
+    AndroidPhone,
+    // ServerList
+  },
+  data() {
     return {
       userId: 666,
       token: '',
     }
   },
   created() {
-    var api = 'http://localhost:10111/user/queryAll';
-
-    get(api).then((response) => {
-      console.log(response)
+    api.queryById({ id: 3506 }).then(data => {
+      console.log(data);
     })
   }
 }

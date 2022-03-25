@@ -1,5 +1,7 @@
 # frontend-vue
 
+Vue + Mint UI 
+
 > A Vue.js project
 
 ## Build Setup
