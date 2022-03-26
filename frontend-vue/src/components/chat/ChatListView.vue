@@ -17,7 +17,7 @@
               <div class="chat-text" v-html="replaceFace(item.content)"></div>
             </li>
             <li v-if="item.type==2">
-              <div class="chat-user"><img src="../../assets/logo.png"></div>
+              <div class="chat-user"><img src="https://sogrey.top/img/Sogrey.png"></div>
               <div class="time"><cite>{{item.name}}<i>{{item.time}}</i></cite></div>
               <div class="chat-text" v-html="replaceFace(item.content)"></div>
             </li>
@@ -188,17 +188,17 @@ export default {
         var chatlist = document.getElementsByClassName('chatlist')[0];
         var oldHeight = chatlist.scrollHeight;
 
-        _this.records.unshift({
-          type: 1,
-          time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
-          name: '游客',
-          content: '你好！13213'
-        }, {
-          type: 2,
-          time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
-          name: '客户MM',
-          content: '欢迎欢迎━(*｀∀´*)ノ亻!'
-        });
+        // _this.records.unshift({
+        //   type: 1,
+        //   time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+        //   name: '游客',
+        //   content: '你好！13213'
+        // }, {
+        //   type: 2,
+        //   time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+        //   name: '客户MM',
+        //   content: '欢迎欢迎━(*｀∀´*)ノ亻!'
+        // });
 
         setTimeout(function () {
           var newHeight = chatlist.scrollHeight;
@@ -282,7 +282,7 @@ a.link {
 
 .chat-user {
   position: absolute;
-  left: 3px;
+  left: 3px;top: 10px;
 }
 
 .chat-text,
