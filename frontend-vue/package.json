@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "cnchar": "^3.0.5",
+    "cnchar-draw": "^3.0.5",
     "mint-ui": "^2.1.0",
     "qs": "^6.10.3",
     "vue": "^2.5.2",
@@ -18,8 +20,6 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "node-sass": "^7.0.1",
-    "sass-loader": "^12.6.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

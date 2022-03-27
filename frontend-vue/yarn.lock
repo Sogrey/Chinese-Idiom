@@ -1694,6 +1694,25 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
+cnchar-draw@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/cnchar-draw/-/cnchar-draw-3.0.5.tgz#717d6b4ba04279c62cd88f8fc23611cfc9f16feb"
+  integrity sha512-4PxEuvwu3co/gp/iNvZvvPSWxZ4pDMxCMIHNcpBgdfOK9GXwo/F40KPsAsK+GaPOlZF63Ndz2dtiUZe1Dy0bhw==
+  dependencies:
+    cnchar-types "^3.0.5"
+
+cnchar-types@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/cnchar-types/-/cnchar-types-3.0.5.tgz#49a54d4d0b448cab3e49ac0be227ed9a7a664513"
+  integrity sha512-RpCi0Ma/gPd4cpfJFpctjCiC82vlq0KoObsHMv8kVNBmDhjhvIcgy5kmO5DdfpZzyWosxH42pfST2QWmR+2vog==
+
+cnchar@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/cnchar/-/cnchar-3.0.5.tgz#e4c3162161144556e11e0c94793d80c0dd35da47"
+  integrity sha512-WQtMy1J2JElKP88f1ebbJhn2UcU59yhMwVAJCP8TOZyuT+D46e3pOXEqgZwOghfngbq0jxmXh7x1nEXOHQbzwA==
+  dependencies:
+    cnchar-types "^3.0.5"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"

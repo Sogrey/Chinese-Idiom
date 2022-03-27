@@ -33,7 +33,7 @@ export default function request(url, type = 'GET', data = {}) {
         if(res.data.token) {
           localStorage.token = res.data.token
         }
-        resolve(res.data)
+        resolve(res.data.datas)
         //否则的话就message错误然后reject
       }else{
         reject(res.data)

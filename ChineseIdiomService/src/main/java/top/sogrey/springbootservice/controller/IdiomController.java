@@ -83,6 +83,27 @@ public class IdiomController {
 		}
 	}
 	
+	// 修复拼音，数据清洗
+	@RequestMapping(value = "/pinyinRepair", method = RequestMethod.GET)
+	public BaseResult pinyinRepair() {
+		try {
+			List<Idiom> allIdioms = idiomMapper.selectList(null);
+			StandardResult<Idiom> result = new StandardResult<Idiom>(0, "queryAll:查询成功。");
+			if(allIdioms.size()>0) {
+				for (int i = 0; i < allIdioms.size(); i++) {
+					Idiom idiom = allIdioms.get(i);
+					idiom.settPinyin(idiom.gettPinyin());
+					
+					idiomMapper.updateById(idiom);
+				}
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseResult(1, "queryAll,操作失败:" + e.getMessage());
+		}
+	}
+	
 	/**
 	 * 根据成语 查询数据
 	 * 

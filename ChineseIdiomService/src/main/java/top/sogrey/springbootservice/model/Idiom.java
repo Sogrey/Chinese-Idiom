@@ -18,14 +18,14 @@ public class Idiom {
 	private String word;
 	@TableField(value = "length")
 	private int length;
-	@TableField(value = "pingyin")
-	private String pingyin;
+	@TableField(value = "pinyin")
+	private String pinyin;
 	@TableField(value = "explanation")
 	private String explanation;
 	@TableField(value = "source")
 	private String source;
-	@TableField(value = "tPintin")
-	private String tPintin;
+	@TableField(value = "tPinyin")
+	private String tPinyin;
 	@TableField(value = "abbreviation")
 	private String abbreviation;
 	@TableField(value = "firstWordPinyin")
@@ -98,12 +98,12 @@ public class Idiom {
 		return this;
 	}
 
-	public String getPingyin() {
-		return pingyin;
+	public String getpinyin() {
+		return pinyin;
 	}
 
-	public Idiom setPingyin(String pingyin) {
-		this.pingyin = pingyin;
+	public Idiom setpinyin(String pinyin) {
+		this.pinyin = pinyin;
 		return this;
 	}
 
@@ -125,17 +125,21 @@ public class Idiom {
 		return this;
 	}
 
-	public String gettPintin() {
-		return tPintin;
+	public String gettPinyin() {
+		return tPinyin;
 	}
 
-	public Idiom settPintin(String tPintin) {
-		this.tPintin = tPintin;
-		String[] tPintinArray = tPintin.split(" ");
+	public Idiom settPinyin(String tPinyin) {
+		this.tPinyin = tPinyin;
+		System.out.println(tPinyin);
+		String[] tPinyinArray = tPinyin.replaceAll("，", " ").replaceAll(",", " ").split(" ");
 		this.abbreviation = "";
-		for (String string : tPintinArray) {
-			this.abbreviation += string.substring(0, 1);
+		for (String string : tPinyinArray) {
+			if(string.length()>0)
+			this.abbreviation += string.trim().substring(0, 1);
 		}
+		this.setFirstWordPinyin(tPinyinArray[0]);
+		this.setLastWordPinyin(tPinyinArray[tPinyinArray.length-1]);
 		return this;
 	}
 
@@ -159,8 +163,8 @@ public class Idiom {
 
 	@Override
 	public String toString() {
-		return "Idiom [id=" + id + ", word=" + word + ", length=" + length + ", pingyin=" + pingyin + ", explanation="
-				+ explanation + ", source=" + source + ", tPintin=" + tPintin + ", abbreviation=" + abbreviation
+		return "Idiom [id=" + id + ", word=" + word + ", length=" + length + ", pinyin=" + pinyin + ", explanation="
+				+ explanation + ", source=" + source + ", tPinyin=" + tPinyin + ", abbreviation=" + abbreviation
 				+ ", firstWordPinyin=" + firstWordPinyin + ", lastWordPinyin=" + lastWordPinyin + ", firstchar="
 				+ firstchar + ", lastchar=" + lastchar + "]";
 	}
