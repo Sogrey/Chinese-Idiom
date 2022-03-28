@@ -35,7 +35,7 @@ export default {
     return {
       userId: 666,
       token: '',
-      word:'只知其一，未知其二',
+      word:'不到黄河心不死',
     }
   },
   created() {

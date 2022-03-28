@@ -131,7 +131,6 @@ public class Idiom {
 
 	public Idiom settPinyin(String tPinyin) {
 		this.tPinyin = tPinyin;
-		System.out.println(tPinyin);
 		String[] tPinyinArray = tPinyin.replaceAll("，", " ").replaceAll(",", " ").split(" ");
 		this.abbreviation = "";
 		for (String string : tPinyinArray) {

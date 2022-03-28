@@ -104,6 +104,23 @@ public class IdiomController {
 		}
 	}
 	
+	@RequestMapping(value = "/idUpdate", method = RequestMethod.GET)
+	public BaseResult idUpdate(int id,int id2) {
+		try {
+			Idiom idiom = idiomMapper.selectById(id);
+			Idiom idiom2 = idiomMapper.selectById(id2);
+			// idiom <=== idiom2
+			idiom2.setId(idiom.getId());
+			idiomMapper.updateById(idiom2);
+			idiomMapper.deleteById(id2);
+			StandardResult<Idiom> result = new StandardResult<Idiom>(0, "queryAll:查询成功。");
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseResult(1, "queryAll,操作失败:" + e.getMessage());
+		}
+	}
+	
 	/**
 	 * 根据成语 查询数据
 	 * 
