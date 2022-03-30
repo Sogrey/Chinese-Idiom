@@ -83,6 +83,27 @@ public class IdiomController {
 		}
 	}
 	
+	/**
+	 * 根据关键词模糊查找成语
+	 * 
+	 * @example http://localhost:10119/idiom/fuzzyQueryByWord?word=朝三
+	 * @param word
+	 * @return
+	 */
+	@RequestMapping(value = "/fuzzyQueryByWord", method = RequestMethod.GET)
+	public BaseResult fuzzyQueryByWord(@RequestParam("word") String word) {
+		try {
+			List<Idiom> allIdioms = idiomMapper.fuzzyQueryByWord(word);
+
+			StandardResult<Idiom> result = new StandardResult<>(0, "fuzzyQueryByWord:查询成功。");
+			result.addDatas(allIdioms);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseResult(1, "fuzzyQueryByWord，操作失败:" + e.getMessage());
+		}
+	}
+	
 	// 修复拼音，数据清洗
 	@RequestMapping(value = "/pinyinRepair", method = RequestMethod.GET)
 	public BaseResult pinyinRepair() {

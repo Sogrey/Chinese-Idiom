@@ -7,6 +7,11 @@ function padding(s, len) {
 };
 
 export default {
+    isMobile: function () { // 判断是否是移动端，引擎及cesium中所有判断都从这里取以保证一致，一处修改，多处应用
+        var regu = /(HarmonyOS|phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|MiuiBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i;
+        var re = new RegExp(regu);
+        return re.test(navigator.userAgent)
+    },
     getQueryStringByName: function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -18,8 +23,6 @@ export default {
         return context == null || context == "" || context == "undefined" ? "" : context;
     },
     formatDate: {
-
-
         format: function (date, pattern) {
             pattern = pattern || DEFAULT_PATTERN;
             return pattern.replace(SIGN_REGEXP, function ($0) {
