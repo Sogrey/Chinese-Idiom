@@ -38,7 +38,7 @@ public interface IdiomMapper extends BaseMapper<Idiom> {
 		public String fuzzyQueryByWord(String word) {
 			String sql = "SELECT * FROM table_idiom";
 			if (!StringUtils.isEmpty(word)) {
-				sql += " WHERE word LIKE '%" + word + "%'";
+				sql += " WHERE word LIKE '%" + word + "%' ORDER BY abbreviation";
 			}
 			return sql;
 		}

@@ -15,23 +15,25 @@
           </div>
         </div>
 
+        <!-- <div>{{testValue}}</div> -->
+
         <div class="modules">
-          <div class="mod_item no-touch">
+          <div class="mod_item no-touch transitionAnimationLeft" :style="styleText" key="module1">
             <div class="wrap_title" style="background-image: url(./static/imgs/modules-1.png);" @click="selectedModule(1)">
               <span>成语接龙</span>
             </div>
           </div>
-          <div class="mod_item no-touch">
+          <div class="mod_item no-touch transitionAnimationRight" :style="styleText" key="module2">
             <div class="wrap_title" style="background-image: url(./static/imgs/modules-2.png);" @click="selectedModule(2)">
               <span>成语典故</span>
             </div>
           </div>
-          <div class="mod_item no-touch">
+          <div class="mod_item no-touch transitionAnimationLeft" :style="styleText" key="module3">
             <div class="wrap_title" style="background-image: url(./static/imgs/modules-3.png);" @click="selectedModule(3)">
               <span>成语故事</span>
             </div>
           </div>
-          <div class="mod_item no-touch">
+          <div class="mod_item no-touch transitionAnimationRight" :style="styleText" key="module4">
             <div class="wrap_title" style="background-image: url(./static/imgs/modules-4.png);" @click="selectedModule(4)">
               <span>虚位以待</span>
             </div>
@@ -74,9 +76,17 @@ export default {
   },
   data() {
     return {
+      showModule: true,
+      testValue: 0,
+      translateX: 0,
       userId: 666,
       token: '',
       word: '不到黄河心不死',
+      styleText: {
+        '--transform-x': 0,
+        '--transform-x-n': 0,
+        '--opacity': 1,
+      }
     }
   },
   created() {
@@ -94,6 +104,18 @@ export default {
           position: 'center',
           duration: 5000
         });
+        this.showModule = !this.showModule;
+
+        // this.$tween.fade(this, { testValue: 10000 }, 6000);
+
+        this.$tween.fade(this, {
+          styleText: {
+            '--transform-x': 50,
+            '--transform-x-n': -50,
+            '--opacity': 0,
+          }
+        }, 3000);
+
         return;
       }
 
@@ -125,6 +147,14 @@ export default {
 </script>
 
 <style scoped>
+.transitionAnimationLeft {
+  transform: translateX(var(--transform-x-n)%);
+  opacity: var(--opacity);
+}
+.transitionAnimationRight {
+  transform: translateX(var(--transform-x)%);
+  opacity: var(--opacity);
+}
 html,
 body {
   margin: 0;
