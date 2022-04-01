@@ -4,7 +4,7 @@
   background-image: url(./static/imgs/index-bg.jpg);">
     </div>
     <div class="page-content">
-      <div class="page-center-content">
+      <div class="page-center-content" :style="styleText">
         <div id="search-box">
           <div class="page-title">中华成语</div>
           <div id="search-area">
@@ -14,6 +14,8 @@
             <button class="search_submit" id="search_submit" @click="searchSubmit">搜索</button>
           </div>
         </div>
+
+        <IdiomInfo v-if="!showModule" :inputword="word" ></IdiomInfo>
 
         <!-- <div>{{testValue}}</div> -->
 
@@ -58,6 +60,7 @@
 </template>
 
 <script>
+import VConsole from 'vconsole';
 import api from './http/api.js'
 import AndroidPhone from './components/AndroidPhone'
 import ChatList from './components/chat/ChatListView'
@@ -81,11 +84,19 @@ export default {
       translateX: 0,
       userId: 666,
       token: '',
-      word: '不到黄河心不死',
+      word: '朝三暮四',
+      isInitState: true,
+      styleVlaue: {
+        '--transform-x-v': 0,
+        '--transform-x-n-v': 0,
+        '--opacity-v': 1,
+        '--page-center-content-heigth-v': 40,
+      },
       styleText: {
-        '--transform-x': 0,
-        '--transform-x-n': 0,
+        '--transform-x': '0%',
+        '--transform-x-n': '0%',
         '--opacity': 1,
+        '--page-center-content-heigth': '40%',
       }
     }
   },
@@ -93,9 +104,67 @@ export default {
     // api.queryById({ id: 3506 }).then(data => {
     //   console.log(data);
     // });
+    const vConsole = new VConsole({ theme: 'dark' });
 
+    // call `console` methods as usual
+    console.log('Hello world');
+
+  }, mounted() {
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate', this.goBack, false);
+    }
+  },
+  destroyed() {
+    window.removeEventListener('popstate', this.goBack, false);
   },
   methods: {
+    goBack: function (params) {
+      // 该事件仅在浏览器后退按钮被点击时触发
+
+      if (!this.isInitState) {//  首页未操作
+        this.isInitState = true;
+        this.showModule = true;
+
+        var _that = this;
+        this.$tween.fade(this, {
+          styleVlaue: {
+            '--transform-x-v': this.showModule ? 50 : 0,
+            '--transform-x-n-v': this.showModule ? -50 : 0,
+            '--opacity-v': this.showModule ? 0 : 1,
+            '--page-center-content-heigth-v': this.showModule ? 80 : 40,
+          }
+        }, 100, {
+          onUpdate: () => {
+            _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
+            _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
+            _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
+            _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
+          }
+        });
+        return;
+      }
+
+      window.removeEventListener('popstate', this.goBack, true);
+
+
+      //   var router = document.URL.split('#')[1];
+      //   alert(router);
+      //   if (router == '' || router.length == 0) {
+      //     alert('首页未操作');
+
+      //   }
+      //   let needCofirmRouter = ['/'];
+      //   alert(document.URL.split('#')[1]);
+      //   history.pushState(null, null, null);
+      //   if (needCofirmRouter == document.URL.split('#')[1]) { //  只有 `/`
+      //     confirm('请确认数据已保存，页面跳转后已填写的数据会被清空，是否继续跳转？', '提示', {
+      //       confirmButtonText: '是',
+      //       cancelButtonText: '否',
+      //       type: 'warning'
+      //     })
+      //   }
+    },
     searchSubmit: function () {
       var keyword = document.querySelector('#search_sth').value;
       if (keyword.length == 0) {
@@ -106,15 +175,26 @@ export default {
         });
         this.showModule = !this.showModule;
 
+        this.isInitState = false;
+
         // this.$tween.fade(this, { testValue: 10000 }, 6000);
 
+        var _that = this;
         this.$tween.fade(this, {
-          styleText: {
-            '--transform-x': 50,
-            '--transform-x-n': -50,
-            '--opacity': 0,
+          styleVlaue: {
+            '--transform-x-v': this.showModule ? 0 : 50,
+            '--transform-x-n-v': this.showModule ? 0 : -50,
+            '--opacity-v': this.showModule ? 1 : 0,
+            '--page-center-content-heigth-v': this.showModule ? 40 : 80,
           }
-        }, 3000);
+        }, 100, {
+          onUpdate: () => {
+            _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
+            _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
+            _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
+            _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
+          }
+        });
 
         return;
       }
@@ -148,11 +228,11 @@ export default {
 
 <style scoped>
 .transitionAnimationLeft {
-  transform: translateX(var(--transform-x-n)%);
+  transform: translateX(var(--transform-x-n));
   opacity: var(--opacity);
 }
 .transitionAnimationRight {
-  transform: translateX(var(--transform-x)%);
+  transform: translateX(var(--transform-x));
   opacity: var(--opacity);
 }
 html,
@@ -187,6 +267,7 @@ textarea {
   min-width: 330px;
   height: 100%;
   position: absolute;
+  overflow: hidden;
 }
 .full-page {
   height: 100%;
@@ -225,7 +306,7 @@ textarea {
 }
 .page-center-content {
   width: 100%;
-  height: auto;
+  height: var(--page-center-content-heigth);
   display: block;
   background: transparent;
 }
@@ -273,7 +354,7 @@ textarea {
 }
 #search-box #search-area .input_area #search_sth {
   border-radius: 8px 0 0 8px;
-  width: auto;
+  width: 80%;
   flex: 1; /*这里设置为占比1，填充满剩余空间*/
   height: 40px;
   border: 0 solid transparent;

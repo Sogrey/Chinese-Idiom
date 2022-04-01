@@ -31,9 +31,11 @@ export default {
 <style scoped>
 .idiom-part {
   margin: 10px 0 10px 0;
+  color: #fff;
 }
 .idiom-part-label {
-  font-size: 18px;color: #888;
+  font-size: 18px;
+  color: #888;
 }
 .idiom-part-label::before {
   content: "【";
@@ -44,5 +46,12 @@ export default {
 .idiom-part-value {
   font-size: 21px;
   text-indent: 50px;
+}
+
+.idiom-part-label,
+.idiom-part-value {
+  justify-content: start;
+  align-items: start;
+  text-align: start;
 }
 </style>

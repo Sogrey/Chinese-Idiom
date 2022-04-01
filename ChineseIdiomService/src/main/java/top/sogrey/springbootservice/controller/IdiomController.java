@@ -104,6 +104,28 @@ public class IdiomController {
 		}
 	}
 	
+	/**
+	 * 随机查询指定条数条目
+	 * 
+	 * @example http://localhost:10119/idiom/randomQuery?limit=1
+	 * @param limit
+	 * @return
+	 */
+	@RequestMapping(value = "/randomQuery", method = RequestMethod.GET)
+	public BaseResult randomQuery(@RequestParam("limit") String limit) {
+		try {
+			List<Idiom> allIdioms = idiomMapper.randomQuery(limit);
+
+			StandardResult<Idiom> result = new StandardResult<>(0, "randomQuery:查询成功。");
+			result.addDatas(allIdioms);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseResult(1, "randomQuery，操作失败:" + e.getMessage());
+		}
+	}
+	
+	
 	// 修复拼音，数据清洗
 	@RequestMapping(value = "/pinyinRepair", method = RequestMethod.GET)
 	public BaseResult pinyinRepair() {

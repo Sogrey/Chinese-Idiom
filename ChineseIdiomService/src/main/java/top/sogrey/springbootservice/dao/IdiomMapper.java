@@ -3,8 +3,6 @@ package top.sogrey.springbootservice.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +23,9 @@ public interface IdiomMapper extends BaseMapper<Idiom> {
 	@SelectProvider(type = IdiomDaoProvider.class, method = "fuzzyQueryByWord")
 	List<Idiom> fuzzyQueryByWord(String word);
 
+	@SelectProvider(type = IdiomDaoProvider.class, method = "randomQuery")
+	List<Idiom> randomQuery(String limit);
+
 	/**
 	 * The type Idiom dao provider.
 	 */
@@ -41,6 +42,18 @@ public interface IdiomMapper extends BaseMapper<Idiom> {
 				sql += " WHERE word LIKE '%" + word + "%' ORDER BY abbreviation";
 			}
 			return sql;
+		}
+
+		/**
+		 * 随机查询 limit 条数据
+		 * @param limit
+		 * @return
+		 */
+		public String randomQuery(String limit) {
+			int limitNum = Integer.parseInt(limit);
+			if (limitNum <= 0)
+				limitNum = 1;
+			return "SELECT * FROM table_idiom order by rand() limit " + limitNum;
 		}
 	}
 

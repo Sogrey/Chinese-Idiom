@@ -94,6 +94,7 @@ export default {
 #idiom-pinyin {
   text-align-last: center;
   width: auto;
+  color: #fff;
 }
 #idiom-pinyin > label {
   width: 62px;

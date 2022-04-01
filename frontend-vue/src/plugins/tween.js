@@ -8,18 +8,19 @@ export default {
     pause: function (tw) {
         tw.pause();
     },
-    fade: function (target, to, during, delay, easing, onUpdate, onComplete) {
+    fade: function (target, to, during, options) {
         if (!target || !to) {
             return;
         }
         if (during == null) {
             during = 260;
         }
+        if(!options) options = {};
         let tw = new TWEEN.Tween(target).to(to, during);
-        if (delay) tw.delay(delay);
-        tw.easing(easing || TWEEN.Easing.Linear.None)
-        if (onUpdate) tw.onUpdate(onUpdate);
-        if (onComplete) tw.onComplete(onComplete);
+        tw.delay(options.delay?options.delay:0);
+        tw.easing(options.easing || TWEEN.Easing.Linear.None)
+        tw.onUpdate(options.onUpdate?options.onUpdate:()=>{});
+        tw.onComplete(options.onComplete?options.onComplete:()=>{});
         tw.start();
         return tw;
     },

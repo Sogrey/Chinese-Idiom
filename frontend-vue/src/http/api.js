@@ -5,6 +5,7 @@ const URL = {
     GET_IDIOM_BY_ID: '/idiom/queryById',
     GET_IDIOM_BY_WORD: '/idiom/queryByWord',
     GET_IDIOM_BY_KEYWORD: '/idiom/fuzzyQueryByWord',
+    GET_IDIOM_BY_RANDOM: '/idiom/randomQuery',
 };
 
 export default {
@@ -23,7 +24,13 @@ export default {
     /**
      * 根据部分关键词查找匹配的条目
      */
-     fuzzyQueryByWord({ word }) {
+    fuzzyQueryByWord({ word }) {
         return request(URL.GET_IDIOM_BY_KEYWORD, 'GET', { word });
+    },
+    /**
+     * 随机查询n条数据
+     */
+    randomQuery({ limit }) {
+        return request(URL.GET_IDIOM_BY_RANDOM, 'GET', { limit });
     },
 };
