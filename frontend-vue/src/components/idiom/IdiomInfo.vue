@@ -80,49 +80,49 @@ export default {
 
     // api.queryByWord({ word: this.inputword })
     api.randomQuery({ limit: 1 })
-    .then(datas => {
-      //   console.log(datas)
-      if (datas && Array.isArray(datas) && datas.length > 0) {
-        var data = datas[0];
-        this.word = data.word;
-        this.pinyin = data.pinyin.replace(/，/ig, " ").split(' ');
+      .then(datas => {
+        //   console.log(datas)
+        if (datas && Array.isArray(datas) && datas.length > 0) {
+          var data = datas[0];
+          this.word = data.word;
+          this.pinyin = data.pinyin.replace(/，/ig, " ").split(' ');
 
-        // abbreviation: "zsms"
-        // explanation: "原指玩弄手法欺骗人。后用来比喻常常变卦，反复无常。"
-        // firstWordPinyin: "zhao"
-        // firstchar: "朝"
-        // id: 3506
-        // lastWordPinyin: "si"
-        // lastchar: "四"
-        // length: 4
-        // pinyin: "zhāo sān mù sì"
-        // source: "《庄子·齐物论》：“狙公赋芧，曰：‘朝三而暮四。’众狙皆怒。曰：‘然则朝四而暮三。’众狙皆悦。名实未亏而喜怒为用，亦因是也。”"
-        // tPintin: "zhao san mu si"
-        // word: "朝三暮四"
+          // abbreviation: "zsms"
+          // explanation: "原指玩弄手法欺骗人。后用来比喻常常变卦，反复无常。"
+          // firstWordPinyin: "zhao"
+          // firstchar: "朝"
+          // id: 3506
+          // lastWordPinyin: "si"
+          // lastchar: "四"
+          // length: 4
+          // pinyin: "zhāo sān mù sì"
+          // source: "《庄子·齐物论》：“狙公赋芧，曰：‘朝三而暮四。’众狙皆怒。曰：‘然则朝四而暮三。’众狙皆悦。名实未亏而喜怒为用，亦因是也。”"
+          // tPintin: "zhao san mu si"
+          // word: "朝三暮四"
 
-        this.idiomParts.push({
-          label: "成语", value: data.word
-        });
-        this.idiomParts.push({
-          label: "长度", value: data.length
-        });
-        this.idiomParts.push({
-          label: "拼音", value: data.pinyin
-        });
-        this.idiomParts.push({
-          label: "去调拼音", value: data.tPinyin
-        });
-        this.idiomParts.push({
-          label: "拼音缩写", value: data.abbreviation
-        });
-        this.idiomParts.push({
-          label: "释义", value: data.explanation
-        });
-        this.idiomParts.push({
-          label: "出处", value: data.source
-        });
-      }
-    });
+          this.idiomParts.push({
+            label: "成语", value: data.word
+          });
+          this.idiomParts.push({
+            label: "长度", value: data.length
+          });
+          this.idiomParts.push({
+            label: "拼音", value: data.pinyin
+          });
+          this.idiomParts.push({
+            label: "去调拼音", value: data.tPinyin
+          });
+          this.idiomParts.push({
+            label: "拼音缩写", value: data.abbreviation
+          });
+          this.idiomParts.push({
+            label: "释义", value: data.explanation
+          });
+          this.idiomParts.push({
+            label: "出处", value: data.source
+          });
+        }
+      });
   },
   beforeUpdate: function () {
     // 更新前
@@ -150,9 +150,10 @@ export default {
 <style scoped>
 .IdiomInfo {
   padding: 10px;
-  margin: 20px 30px;
+  margin: 20px auto;
   overflow-y: scroll;
   max-height: 85%;
+  max-width: 700px;
 }
 .idiom-buttons-group {
   width: fit-content;
