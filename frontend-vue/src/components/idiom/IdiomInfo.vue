@@ -61,9 +61,12 @@ export default {
   watch: {
     inputwordFun: function () {
       this.inputword = this.inputwordFun;
+      debugger
+      searchWord(this.inputword);
     },
     pinyinFun: function () {
       this.pinyin = this.pinyinFun;
+      //   searchWord(this.inputword);
     },
   },
   beforeCreate: function () {
@@ -76,53 +79,8 @@ export default {
     // 挂载前
   },
   mounted: function () {
-    // 挂载结束   
-
-    // api.queryByWord({ word: this.inputword })
-    api.randomQuery({ limit: 1 })
-      .then(datas => {
-        //   console.log(datas)
-        if (datas && Array.isArray(datas) && datas.length > 0) {
-          var data = datas[0];
-          this.word = data.word;
-          this.pinyin = data.pinyin.replace(/，/ig, " ").split(' ');
-
-          // abbreviation: "zsms"
-          // explanation: "原指玩弄手法欺骗人。后用来比喻常常变卦，反复无常。"
-          // firstWordPinyin: "zhao"
-          // firstchar: "朝"
-          // id: 3506
-          // lastWordPinyin: "si"
-          // lastchar: "四"
-          // length: 4
-          // pinyin: "zhāo sān mù sì"
-          // source: "《庄子·齐物论》：“狙公赋芧，曰：‘朝三而暮四。’众狙皆怒。曰：‘然则朝四而暮三。’众狙皆悦。名实未亏而喜怒为用，亦因是也。”"
-          // tPintin: "zhao san mu si"
-          // word: "朝三暮四"
-
-          this.idiomParts.push({
-            label: "成语", value: data.word
-          });
-          this.idiomParts.push({
-            label: "长度", value: data.length
-          });
-          this.idiomParts.push({
-            label: "拼音", value: data.pinyin
-          });
-          this.idiomParts.push({
-            label: "去调拼音", value: data.tPinyin
-          });
-          this.idiomParts.push({
-            label: "拼音缩写", value: data.abbreviation
-          });
-          this.idiomParts.push({
-            label: "释义", value: data.explanation
-          });
-          this.idiomParts.push({
-            label: "出处", value: data.source
-          });
-        }
-      });
+    // 挂载结束
+    searchWord(this.inputword);
   },
   beforeUpdate: function () {
     // 更新前
@@ -142,6 +100,53 @@ export default {
       this.isLike = !this.isLike; console.log(this.isLike ? '喜欢' : '取关');
     },
     doFeedback: function () { console.log('反馈'); },
+    searchWord: function (word) {
+      api.queryByWord({ word: word })
+        // api.randomQuery({ limit: 1 })
+        .then(datas => {
+          //   console.log(datas)
+          if (datas && Array.isArray(datas) && datas.length > 0) {
+            var data = datas[0];
+            this.word = data.word;
+            this.pinyin = data.pinyin.replace(/，/ig, " ").split(' ');
+
+            // abbreviation: "zsms"
+            // explanation: "原指玩弄手法欺骗人。后用来比喻常常变卦，反复无常。"
+            // firstWordPinyin: "zhao"
+            // firstchar: "朝"
+            // id: 3506
+            // lastWordPinyin: "si"
+            // lastchar: "四"
+            // length: 4
+            // pinyin: "zhāo sān mù sì"
+            // source: "《庄子·齐物论》：“狙公赋芧，曰：‘朝三而暮四。’众狙皆怒。曰：‘然则朝四而暮三。’众狙皆悦。名实未亏而喜怒为用，亦因是也。”"
+            // tPintin: "zhao san mu si"
+            // word: "朝三暮四"
+
+            this.idiomParts.push({
+              label: "成语", value: data.word
+            });
+            this.idiomParts.push({
+              label: "长度", value: data.length
+            });
+            this.idiomParts.push({
+              label: "拼音", value: data.pinyin
+            });
+            this.idiomParts.push({
+              label: "去调拼音", value: data.tPinyin
+            });
+            this.idiomParts.push({
+              label: "拼音缩写", value: data.abbreviation
+            });
+            this.idiomParts.push({
+              label: "释义", value: data.explanation
+            });
+            this.idiomParts.push({
+              label: "出处", value: data.source
+            });
+          }
+        });
+    }
   }
 }
 </script>

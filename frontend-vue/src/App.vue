@@ -15,7 +15,7 @@
           </div>
         </div>
 
-        <IdiomInfo v-if="!showModule" :inputword="word" ></IdiomInfo>
+        <IdiomInfo v-if="!showModule" :inputword="word"></IdiomInfo>
 
         <!-- <div>{{testValue}}</div> -->
 
@@ -84,8 +84,8 @@ export default {
       translateX: 0,
       userId: 666,
       token: '',
-      word: '朝三暮四',
-      isInitState: true,
+      word: '',
+      //   isInitState: true,
       styleVlaue: {
         '--transform-x-v': 0,
         '--transform-x-n-v': 0,
@@ -110,61 +110,43 @@ export default {
     console.log('Hello world');
 
   }, mounted() {
-    if (window.history && window.history.pushState) {
-      history.pushState(null, null, document.URL);
-      window.addEventListener('popstate', this.goBack, false);
-    }
+    // if (window.history && window.history.pushState) {
+    //   history.pushState(null, null, document.URL);
+    //   window.addEventListener('popstate', this.goBack, false);
+    // }
   },
   destroyed() {
-    window.removeEventListener('popstate', this.goBack, false);
+    // window.removeEventListener('popstate', this.goBack, false);
   },
   methods: {
-    goBack: function (params) {
-      // 该事件仅在浏览器后退按钮被点击时触发
+    // goBack: function (params) {
+    //   // 该事件仅在浏览器后退按钮被点击时触发
 
-      if (!this.isInitState) {//  首页未操作
-        this.isInitState = true;
-        this.showModule = true;
+    //   if (!this.isInitState) {//  首页未操作
+    //     this.isInitState = true;
+    //     this.showModule = true;
 
-        var _that = this;
-        this.$tween.fade(this, {
-          styleVlaue: {
-            '--transform-x-v': this.showModule ? 50 : 0,
-            '--transform-x-n-v': this.showModule ? -50 : 0,
-            '--opacity-v': this.showModule ? 0 : 1,
-            '--page-center-content-heigth-v': this.showModule ? 80 : 40,
-          }
-        }, 100, {
-          onUpdate: () => {
-            _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
-            _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
-            _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
-            _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
-          }
-        });
-        return;
-      }
+    //     var _that = this;
+    //     this.$tween.fade(this, {
+    //       styleVlaue: {
+    //         '--transform-x-v': this.showModule ? 50 : 0,
+    //         '--transform-x-n-v': this.showModule ? -50 : 0,
+    //         '--opacity-v': this.showModule ? 0 : 1,
+    //         '--page-center-content-heigth-v': this.showModule ? 80 : 40,
+    //       }
+    //     }, 100, {
+    //       onUpdate: () => {
+    //         _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
+    //         _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
+    //         _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
+    //         _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
+    //       }
+    //     });
+    //     return;
+    //   }
 
-      window.removeEventListener('popstate', this.goBack, true);
-
-
-      //   var router = document.URL.split('#')[1];
-      //   alert(router);
-      //   if (router == '' || router.length == 0) {
-      //     alert('首页未操作');
-
-      //   }
-      //   let needCofirmRouter = ['/'];
-      //   alert(document.URL.split('#')[1]);
-      //   history.pushState(null, null, null);
-      //   if (needCofirmRouter == document.URL.split('#')[1]) { //  只有 `/`
-      //     confirm('请确认数据已保存，页面跳转后已填写的数据会被清空，是否继续跳转？', '提示', {
-      //       confirmButtonText: '是',
-      //       cancelButtonText: '否',
-      //       type: 'warning'
-      //     })
-      //   }
-    },
+    //   window.removeEventListener('popstate', this.goBack, true);
+    // },
     searchSubmit: function () {
       var keyword = document.querySelector('#search_sth').value;
       if (keyword.length == 0) {
@@ -173,19 +155,58 @@ export default {
           position: 'center',
           duration: 5000
         });
-        this.showModule = !this.showModule;
 
-        this.isInitState = false;
+
+        // this.isInitState = false;
 
         // this.$tween.fade(this, { testValue: 10000 }, 6000);
 
-        var _that = this;
-        this.$tween.fade(this, {
+        // var _that = this;
+        // this.$tween.fade(this, {
+        //   styleVlaue: {
+        //     '--transform-x-v': this.showModule ? 0 : 50,
+        //     '--transform-x-n-v': this.showModule ? 0 : -50,
+        //     '--opacity-v': this.showModule ? 1 : 0,
+        //     '--page-center-content-heigth-v': this.showModule ? 40 : 80,
+        //   }
+        // }, 100, {
+        //   onUpdate: () => {
+        //     _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
+        //     _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
+        //     _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
+        //     _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
+        //   }
+        // });
+
+        return;
+      }
+
+      Toast({
+        message: `正在检索'${keyword}'`,
+        position: 'center',
+        duration: 5000
+      });
+
+      var _that = this;
+      _that.showModule = false;
+      api.fuzzyQueryByWord({ word: keyword }).then(data => {
+        console.log(data);
+        if (data.length == 0) {
+          Toast({
+            message: `未检索到：${data}相关词汇`,
+            position: 'center',
+            duration: 5000
+          });
+          return
+        }
+        debugger
+        _that.word = data[0].word;
+        _that.$tween.fade(_that, {
           styleVlaue: {
-            '--transform-x-v': this.showModule ? 0 : 50,
-            '--transform-x-n-v': this.showModule ? 0 : -50,
-            '--opacity-v': this.showModule ? 1 : 0,
-            '--page-center-content-heigth-v': this.showModule ? 40 : 80,
+            '--transform-x-v': _that.showModule ? 0 : 50,
+            '--transform-x-n-v': _that.showModule ? 0 : -50,
+            '--opacity-v': _that.showModule ? 1 : 0,
+            '--page-center-content-heigth-v': _that.showModule ? 40 : 80,
           }
         }, 100, {
           onUpdate: () => {
@@ -196,22 +217,6 @@ export default {
           }
         });
 
-        return;
-      }
-
-      Toast({
-        message: '检索中' + keyword,
-        position: 'center',
-        duration: 5000
-      });
-
-      api.fuzzyQueryByWord({ word: keyword }).then(data => {
-        console.log(data);
-        Toast({
-          message: '检索到：' + data,
-          position: 'center',
-          duration: 5000
-        });
       });
     },
     selectedModule: function (index) {
