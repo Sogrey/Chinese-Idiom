@@ -85,7 +85,6 @@ export default {
       userId: 666,
       token: '',
       word: '',
-      //   isInitState: true,
       styleVlaue: {
         '--transform-x-v': 0,
         '--transform-x-n-v': 0,
