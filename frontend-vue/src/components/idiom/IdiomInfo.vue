@@ -61,12 +61,11 @@ export default {
   watch: {
     inputwordFun: function () {
       this.inputword = this.inputwordFun;
-      debugger
-      searchWord(this.inputword);
+      this.searchWord(this.inputword);
     },
     pinyinFun: function () {
       this.pinyin = this.pinyinFun;
-      //   searchWord(this.inputword);
+      this.searchWord(this.inputword);
     },
   },
   beforeCreate: function () {
@@ -80,7 +79,7 @@ export default {
   },
   mounted: function () {
     // 挂载结束
-    searchWord(this.inputword);
+    this.searchWord(this.inputword);
   },
   beforeUpdate: function () {
     // 更新前
@@ -101,10 +100,10 @@ export default {
     },
     doFeedback: function () { console.log('反馈'); },
     searchWord: function (word) {
-      api.queryByWord({ word: word })
-        // api.randomQuery({ limit: 1 })
+      //   api.queryByWord({ word: word })
+      api.randomQuery({ limit: 1 })
         .then(datas => {
-          //   console.log(datas)
+          console.log(datas)
           if (datas && Array.isArray(datas) && datas.length > 0) {
             var data = datas[0];
             this.word = data.word;

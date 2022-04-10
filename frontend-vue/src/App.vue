@@ -155,27 +155,27 @@ export default {
           duration: 5000
         });
 
+        this.isInitState = false;
+        this.showModule = !this.showModule;
 
-        // this.isInitState = false;
+        this.$tween.fade(this, { testValue: 10000 }, 6000);
 
-        // this.$tween.fade(this, { testValue: 10000 }, 6000);
-
-        // var _that = this;
-        // this.$tween.fade(this, {
-        //   styleVlaue: {
-        //     '--transform-x-v': this.showModule ? 0 : 50,
-        //     '--transform-x-n-v': this.showModule ? 0 : -50,
-        //     '--opacity-v': this.showModule ? 1 : 0,
-        //     '--page-center-content-heigth-v': this.showModule ? 40 : 80,
-        //   }
-        // }, 100, {
-        //   onUpdate: () => {
-        //     _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
-        //     _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
-        //     _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
-        //     _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
-        //   }
-        // });
+        var _that = this;
+        this.$tween.fade(this, {
+          styleVlaue: {
+            '--transform-x-v': this.showModule ? 0 : 50,
+            '--transform-x-n-v': this.showModule ? 0 : -50,
+            '--opacity-v': this.showModule ? 1 : 0,
+            '--page-center-content-heigth-v': this.showModule ? 40 : 80,
+          }
+        }, 100, {
+          onUpdate: () => {
+            _that.styleText['--transform-x'] = `${_that.styleVlaue['--transform-x-v']}%`;
+            _that.styleText['--transform-x-n'] = `${_that.styleVlaue['--transform-x-n-v']}%`;
+            _that.styleText['--opacity'] = _that.styleVlaue['--opacity-v'];
+            _that.styleText['--page-center-content-heigth'] = `${_that.styleVlaue['--page-center-content-heigth-v']}%`;
+          }
+        });
 
         return;
       }
@@ -198,7 +198,7 @@ export default {
           });
           return
         }
-        debugger
+        
         _that.word = data[0].word;
         _that.$tween.fade(_that, {
           styleVlaue: {
